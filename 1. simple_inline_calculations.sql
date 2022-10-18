@@ -1,4 +1,4 @@
-SELECT 
+SELECT
 	market_date,
 	customer_id,
     vendor_id,
