@@ -190,3 +190,40 @@ FROM farmers_market.customer
 WHERE customer_first_name LIKE "Jer%";
 
 -- ISNULL
+SELECT *
+FROM farmers_market.product
+WHERE product_size IS NULL;
+
+/*
+NOTE: Keep in mind that “blank” and NULL are not the same thing in database
+terms. 
+A null database field means that there is no value for a given record. 
+It indicates the absence of a value. A blank database field means that 
+there is a value for a given record, and this value is empty (for a string value) 
+or 0 (for a numeric value).
+
+1. NULL is an absence of a value. An empty string is a value, but is just empty. 
+NULL is special to a database.
+
+2. NULL has no bounds, it can be used for string, integer, date, etc. fields in a database.
+
+3. NULL isn't allocated any memory, the string with NULL value is just a pointer 
+which is pointing to nowhere in memory. however, Empty IS allocated to a memory 
+location, although the value stored in the memory is "".
+
+If someone asked you to find all products that didn’t have product sizes,
+you might also want to check for blank strings, which would equal ‘’ (two
+single-quotes with nothing between), or rows where someone entered a space
+or any number of spaces into that field. The TRIM() function removes excess
+spaces from the beginning or end of a string value, so if you use a combination
+of the TRIM() function and blank string comparison, you can find any row that
+is blank or contains only spaces. In this case, the “Red Potatoes - Small” row,
+shown in Figure 3.14, has a product_size with one space in it, ' ', so could be
+found using the following query:
+*/
+SELECT *
+FROM farmers_market.product
+WHERE
+	product_size IS NULL OR TRIM(product_size) = '';
+    
+-- START FROM A WARNING ABOUT NULL COMPARISONS!
