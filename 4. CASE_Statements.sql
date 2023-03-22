@@ -126,3 +126,34 @@ FROM farmers_market.customer_purchases
 LIMIT 10;
 
 -- CATEGORICAL ENCODING USING CASE
+
+SELECT
+	vendor_id,
+    vendor_name,
+    vendor_type,
+    CASE
+		WHEN vendor_type = 'Arts & Jewelry'
+			THEN 1
+            ELSE 0
+	END AS vendor_type_arts_jewelry,
+    CASE
+		WHEN vendor_type = 'Eggs & Meats'
+			THEN 1
+            ELSE 0
+	END AS vendor_type_eggs_meats,
+    CASE
+		WHEN vendor_type = 'Freshly Focused'
+			THEN 1
+            ELSE 0
+	END AS vendor_type_fresh_focused,
+    CASE
+		WHEN vendor_type = 'Fresh Variety: Veggies & More'
+			THEN 1
+            ELSE 0
+	END AS vendor_type_fresh_variety,
+    CASE
+		WHEN vendor_type = 'Prepared Foods'
+			THEN 1
+            ELSE 0
+	END AS vendor_type_prepared    
+FROM farmers_market.vendor;
